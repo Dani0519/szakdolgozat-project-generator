@@ -1,0 +1,15 @@
+{
+  "name": "inclouded-monitor",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular",
+  "proxies": [
+    {
+      "path": "/api",
+      "proxyUrl": "http://localhost:3000",
+      "secure": false,
+      "loglevel": "debug"
+    }
+  ]
+}

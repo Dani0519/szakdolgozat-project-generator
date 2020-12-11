@@ -1,0 +1,41 @@
+<ion-card style="box-shadow: none;" id="container" mode="ios">
+  <ion-card-header mode="ios">
+    <ion-card-title mode="ios">Overview</ion-card-title>
+    <ion-card-subtitle mode="ios">About some features</ion-card-subtitle>
+  </ion-card-header>
+  <ion-card-content style="text-align: center;">
+
+    <ion-card mode="ios" class="overview-card">
+      <ion-card-header mode="ios">
+        <ion-card-title mode="ios">Jenkins</ion-card-title>
+        <ion-card-subtitle mode="ios">Views & Pipelines</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content mode="ios">
+        <ion-spinner [hidden]="jenkinsLoaded" name="crescent"></ion-spinner>
+        <canvas [hidden]="!jenkinsLoaded" id="basicJenkins"></canvas>
+        <ion-button [routerLink]="'/deployments'" [hidden]="!jenkinsLoaded" shape="round" size="small">More infromation</ion-button>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card mode="ios" class="overview-card">
+      <ion-card-header mode="ios">
+        <ion-card-title mode="ios">Zabbix</ion-card-title>
+        <ion-card-subtitle mode="ios">About the docker server</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content mode="ios">
+        <p>Chart is under development</p>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card mode="ios" class="overview-card">
+      <ion-card-header mode="ios">
+        <ion-card-title mode="ios">Projects</ion-card-title>
+        <ion-card-subtitle mode="ios">Integrated projects</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content mode="ios">
+        <p>Chart is under development</p>
+      </ion-card-content>
+    </ion-card>
+
+  </ion-card-content>
+</ion-card>

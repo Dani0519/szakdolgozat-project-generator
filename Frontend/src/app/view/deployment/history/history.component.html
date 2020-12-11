@@ -1,0 +1,20 @@
+<ion-card id="container" mode="ios">
+  <ion-card-header mode="ios">
+    <ion-card-title mode="ios">History</ion-card-title>
+    <ion-card-subtitle mode="ios">Project deployment history</ion-card-subtitle>
+  </ion-card-header>
+
+  <ion-card-content>
+    <ion-item>
+      <ion-label>Choose a date</ion-label>
+      <ion-datetime (ionChange)="setDate($event)" displayFormat="YYYY MMMM DD"></ion-datetime>
+    </ion-item>
+
+    <p style="text-align: center; font-size: 16px; margin-top: 40px" *ngIf="history.length == 0">No history data</p>
+
+    <div *ngIf="history.length > 0">
+      <history-expansion [deployment]="deployment" *ngFor="let deployment of history"></history-expansion>
+    </div>
+
+  </ion-card-content>
+</ion-card>

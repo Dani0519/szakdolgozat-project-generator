@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+  backend:
+    build:
+      context: Backend
+    image: inclouded-monitor-be
+    container_name: inclouded-monitor-be
+    environment:
+      - MODE=production
+    ports:
+      - 4000:3000

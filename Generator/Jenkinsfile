@@ -1,0 +1,13 @@
+node {
+
+    stage('Check the repository') {
+        git branch: 'master', credentialsId: 'devops', url: 'https://stash.sed.hu/scm/dep/jenkins-project-generator.git'
+        sh 'git config --global credential.helper store'
+        sh 'git pull origin master'
+    }
+
+    stage('Run the script') {
+      sh 'bash main.sh'
+    }
+
+}

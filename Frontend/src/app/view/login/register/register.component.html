@@ -1,0 +1,17 @@
+<title-divider [title]="'Registration'" [subtitle]="'A new user will join to us'" [icon]="'link'"></title-divider>
+
+<form class="example-form">
+  <mat-form-field class="example-full-width">
+    <input (keyup)="getName($event)" matInput placeholder="Full name">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <input (keyup)="getEmail($event)" matInput placeholder="Email address">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <input matInput (keyup)="getPassword($event)" type="password" placeholder="Password">
+  </mat-form-field>
+
+  <button (click)="register()">Registration</button>
+</form>

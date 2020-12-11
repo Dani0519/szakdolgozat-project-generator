@@ -1,0 +1,89 @@
+<ion-header>
+  <ion-fab vertical="top" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="close()" size="small" color="secondary">
+      <ion-icon name="close"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-card style="box-shadow: none; text-align: center; margin: 0px" mode="ios">
+    <ion-card-header mode="ios">
+      <ion-card-title mode="ios">{{ project.name }}</ion-card-title>
+      <ion-card-subtitle mode="ios">{{ project.description }}</ion-card-subtitle>
+    </ion-card-header>
+  </ion-card>
+</ion-header>
+
+<ion-content>
+
+  <ion-card class="page" *ngIf="page === 'info'" mode="ios">
+    <ion-card-header mode="ios">
+      <ion-card-title mode="ios">Project</ion-card-title>
+      <ion-card-subtitle mode="ios">Some information</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <app-mobile-project *ngIf="loaded" [project]="project" [chartData]="mobileChart"></app-mobile-project>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="page" *ngIf="page === 'history'" mode="ios">
+    <ion-card-header mode="ios">
+      <ion-card-title mode="ios">History</ion-card-title>
+      <ion-card-subtitle mode="ios">Deployment history</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <div style="text-align: center;">
+        <h1>SORRY</h1>
+        <p>The history is only available in desktop view</p>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="page" *ngIf="page === 'deploy'" mode="ios">
+    <ion-card-header mode="ios">
+      <ion-card-title mode="ios">Deploy</ion-card-title>
+      <ion-card-subtitle mode="ios">Start deployments</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content style="padding-top: 0px">
+      <app-mobile-deploy [project]="project" [commits]="commits"></app-mobile-deploy>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="page" *ngIf="page === 'rollback'" mode="ios">
+    <ion-card-header mode="ios">
+      <ion-card-title mode="ios">Rollback</ion-card-title>
+      <ion-card-subtitle mode="ios">Rollback to a previous version</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <app-mobile-rollback [project]="project" [stagingTags]="stagingTags" [productionTags]="productionTags">
+      </app-mobile-rollback>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-tabs>
+      <ion-tab-bar slot="bottom">
+        <ion-tab-button (click)="setPage('info')">
+          <ion-icon mode="md" name="clipboard"></ion-icon>
+          <ion-label>INFO</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button (click)="setPage('history')">
+          <ion-icon mode="md" name="time"></ion-icon>
+          <ion-label>HISTORY</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button (click)="setPage('deploy')">
+          <ion-icon mode="md" name="airplane"></ion-icon>
+          <ion-label>DEPLOY</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button (click)="setPage('rollback')">
+          <ion-icon mode="md" name="git-compare"></ion-icon>
+          <ion-label>ROLLBACK</ion-label>
+        </ion-tab-button>
+      </ion-tab-bar>
+    </ion-tabs>
+  </ion-toolbar>
+</ion-footer>

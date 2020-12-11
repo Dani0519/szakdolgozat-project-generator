@@ -1,0 +1,50 @@
+---
+- hosts: docker
+  
+  vars:
+    date: "{{ ansible_date_time.date }}_{{ansible_date_time.hour}}:{{ansible_date_time.minute}}:{{ansible_date_time.second}}"
+  
+  tasks:
+    - include_vars: /DevOps/devops-pass.yaml
+
+    - name: Stop & Delete the container if it exist
+      shell: docker rm -f name
+      ignore_errors: yes
+
+    - name: Start the image
+      docker_container:
+        name: name
+        image: ionic-dev
+        shm_size: 512m
+        detach: no
+        env:
+          repository: https://{{user}}:{{devopspass}}@stash.sed.hu/scm/dep/teszt-repository.git
+          branch: "{{ branch }}"
+          message: "{{ message }}"
+          lint: "{{ lint }}"
+          unit: "{{ unit }}"
+          e2e: "{{ e2e }}"
+          mode: "pre"
+          folder: "web"
+          firebaseSite: "website"
+          date: "{{ date }}"
+          postfix: ""
+          version: "{{ version }}"
+          jobname: "name"
+          author: "{{ author }}"
+          e2epostfix: ""
+        volumes:
+          - /home/admin/FirebaseDeployments:/opt/shared
+          - /home/admin/CodeCoverages/coverages:/opt/shareCoverage
+        env_file: /home/admin/
+      ignore_errors: yes
+
+    - name: Delete the last container
+      shell: docker rm name
+      ignore_errors: yes
+
+    - name: Fetching results from the docker server
+      fetch:
+        src: /home/admin/FirebaseDeployments/name/pre/{{date}}/result.json
+        dest: /home/admin/.jenkins/workspace/name/result-pre.json
+        flat: yes

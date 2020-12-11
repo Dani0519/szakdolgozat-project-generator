@@ -1,0 +1,60 @@
+<ion-card id="container" mode="ios">
+  <ion-card-header mode="ios">
+    <ion-card-title mode="ios">Rollback</ion-card-title>
+    <ion-card-subtitle mode="ios">Start project rollback</ion-card-subtitle>
+  </ion-card-header>
+
+  <ion-card-content>
+    <ion-button (click)="setType('staging')" class="type-button" shape="round" size="small" color="secondary">Staging
+    </ion-button>
+    <ion-button (click)="setType('production')" class="type-button" shape="round" size="small" color="success">
+      Production</ion-button>
+
+    <ion-card *ngIf="type === 'staging'" class="rollback-panel" mode="ios">
+      <ion-card-header mode="ios">
+        <ion-card-title mode="ios">STAGING</ion-card-title>
+        <ion-card-subtitle mode="ios">Rollback to {{ project.sites.staging }}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <p>Rollback to a pervious version on the staging.</p>
+
+        <form class="rollback-form">
+          <ion-item class="rollback-form-item">
+            <ion-label>Version to checkout</ion-label>
+            <ion-select (ionChange)="getStagingCheckout($event)" mode="ios" cancelText="Cancel" okText="Select">
+              <ion-select-option *ngFor="let tag of stagingTags" mode="ios" value="{{tag.displayId}}">
+                {{ tag.displayId }}</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </form>
+
+        <ion-button class="rollback-button" (click)="startStaging()" color="secondary" >Start rollback</ion-button>
+
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card *ngIf="type === 'production'" class="rollback-panel" mode="ios">
+      <ion-card-header mode="ios">
+        <ion-card-title mode="ios">PRODUCTION</ion-card-title>
+        <ion-card-subtitle mode="ios">Rollback to {{ project.sites.production }}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <p>Rollback to a pervious version on the production.</p>
+
+        <form class="rollback-form">
+          <ion-item class="rollback-form-item">
+            <ion-label>Version to checkout</ion-label>
+            <ion-select (ionChange)="getProductionCheckout($event)" mode="ios" cancelText="Cancel" okText="Select">
+              <ion-select-option *ngFor="let tag of productionTags" mode="ios" value="{{tag.displayId}}">
+                {{ tag.displayId }}</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </form>
+
+        <ion-button class="rollback-button" (click)="startProduction()" color="success" >Start production</ion-button>
+
+      </ion-card-content>
+    </ion-card>
+
+  </ion-card-content>
+</ion-card>

@@ -1,0 +1,89 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+#container {
+  display: block;
+  margin: auto;
+  margin-top: 20px;
+  width: 90%;
+  max-width: 380px;
+  box-shadow: none;
+  animation: fadeIn;
+  animation-duration: 0.4s;
+}
+
+h2 {
+  font-size: 18px;
+}
+
+p {
+  font-size: 14px;
+}
+
+#form {
+  display: block;
+  margin: auto;
+  width: 90%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  max-width: 400px;
+}
+
+form {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+ion-item {
+  margin-bottom: 10px;
+}
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px white inset;
+}
+
+.mat-form {
+  margin-top: 14px;
+}
+
+.mat-form-field-wrapper {
+  padding: 0px;
+}
+
+mat-form-field {
+  width: 100%;
+  margin: 0px;
+  padding: 0px;
+}
+
+button {
+  display: inline-block;
+  margin-top: 20px;
+  margin-right: 10px;
+  width: 80px;
+  height: 20px;
+  
+  background-color: var(--ion-color-primary);
+  color: white;
+  font-size: 12px;
+  box-shadow: 0px 0px 20px lightgray;
+}
+
+#register {
+  color: var(--ion-color-success-contrast);
+  background-color: var(--ion-color-success);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    margin-top: 40px;
+  }
+
+  to {
+    opacity: 1;
+    margin-top: 20px;
+  }
+}

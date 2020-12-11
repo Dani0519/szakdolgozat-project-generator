@@ -1,0 +1,69 @@
+.project-name-div {
+    max-width: 50%;
+    width:100%
+}
+
+.editProjectInfo {
+    padding-left: 1rem;
+}
+.add-form-button {
+    padding-left: 0.6rem;
+    --background: whitesmoke;
+    --border-radius: 50%;
+    height: 2rem;
+    width: 2rem;
+    position: relative;
+    --background-hover:  rgb(211, 201, 201);
+}
+.remove-button {
+    --background-color: none;
+    --background: none;
+    --border-radius: 50%;
+    position: relative;
+    height: 2rem;
+    width: 2rem;
+    --background-hover:  rgb(211, 201, 201);
+}
+.remove-icon {
+    color: rgb(245, 66, 114);
+}
+.close-button {
+    color: white;
+    background-color:rgb(12, 209, 232);
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    position: absolute;
+    left: 50%;
+    top: 45%;
+    transform: translate(-50%, -45%);
+    -ms-transform: translate(-50%, -45%); /* for IE 9 */
+    -webkit-transform: translate(-50%, -45%); /* for Safari */
+}
+.spinner {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -50px;
+    margin-left: -50px;
+    width: 100px;
+    height: 100px;
+}
+
+.mat-spinner-color::ng-deep circle{
+    stroke: rgb(0, 0, 0) !important;
+}
+
+::ng-deep .mat-button {
+  background: #0cd1e8 !important;
+  text-transform: uppercase;
+  color: white;
+}
+::ng-deep .mat-ink-bar {
+    background-color:black !important;
+}
+
+::ng-deep .mat-form-field.mat-focused .mat-form-field-ripple{
+    background-color: black !important;
+    padding-left: 5rem;
+}

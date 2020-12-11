@@ -1,0 +1,39 @@
+ion-segment {
+  margin-top: 0px;
+}
+
+ion-segment-button:hover {
+  color: var(--ion-color-primary-contrast);
+  background-color: var(--ion-color-primary);
+}
+
+.panel {
+  width: 100%;
+  margin: auto;
+  margin-top: 24px;
+  animation: panel-in;
+  animation-duration: 0.4s;
+}
+
+@keyframes panel-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.deploy-form {
+  margin-top: 10px;
+}
+
+.deploy-form-item {
+  margin-top: 10px;
+}
+
+.start-button {
+  margin-top: 16px;
+  text-transform: uppercase;
+  width: 90%;
+}

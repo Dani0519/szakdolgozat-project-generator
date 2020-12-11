@@ -1,0 +1,54 @@
+<h3>SUITES<br><span>Search suites for the details</span></h3>
+
+<div id="controlers">
+  <mat-form-field id="suite-select">
+    <mat-label>Select the suite</mat-label>
+    <mat-select (selectionChange)="loadSuite($event)">
+      <mat-option *ngFor="let suite of data" [value]="suite">
+        {{ suite.id }}
+        <span style="color: var(--ion-color-medium)">{{ suite.description }}</span>
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  
+  <!-- <label id="example-radio-group-label">Select the type</label> -->
+  <mat-radio-group (change)="typeChange($event)" color="primary" aria-label="Select an option">
+    <mat-radio-button class="radio-button" checked="true" value="all">All</mat-radio-button>
+    <mat-radio-button class="radio-button" value="passed">Only success</mat-radio-button>
+    <mat-radio-button class="radio-button" value="failed">Only failed</mat-radio-button>
+  </mat-radio-group>  
+</div>
+
+<ion-card class="suite">
+  <ion-card-header>
+    <h4>{{ selectedSuite.id }}<br><span>{{ selectedSuite.fullName }}</span></h4>
+  </ion-card-header>
+  <ion-card-content>
+    <div class="specs">
+      <h5>Specs<span><br>Here you can find the specs of the suite</span></h5>
+      
+      <p *ngIf="selectedSuite.specs.length < 1" style="text-align: center; font-size: 16px;">The specs is empty here</p>
+      
+      <mat-accordion class="example-headers-align">
+        <mat-expansion-panel *ngFor="let spec of selectedSuite.specs">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{ spec.id.replace('spec', 'Spec ') }}
+            </mat-panel-title>
+            <mat-panel-description>
+              {{ spec.status.charAt(0).toUpperCase() + spec.status.substring(1) }}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="spec-content">
+            <h5>Description<br><span>{{ spec.description }}</span></h5>
+            <h6>Duration<span><br>{{ spec.duration }}</span></h6>
+            <h6>Status<span><br>{{ spec.status.charAt(0).toUpperCase() + spec.status.substring(1) }}</span></h6>
+            <h6 *ngIf="spec.status == 'failed'" style="display: block; margin-top: 20px;">Fail reasons
+              <span *ngFor="let reason of spec.failedExpectations"><br>{{ reason.message }}</span>
+            </h6>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </ion-card-content>
+</ion-card>

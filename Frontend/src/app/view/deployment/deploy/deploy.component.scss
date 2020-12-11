@@ -1,0 +1,61 @@
+#container {
+  box-shadow: none;
+  margin-top: 10px;
+  animation: in;
+  animation-duration: 0.4s;
+}
+
+@keyframes in {
+  from {
+    opacity: 0;
+    margin-top: 20px;
+  }
+  to {
+    opacity: 1;
+    margin-top: 10px;
+  }
+}
+
+.type-button {
+  min-width: 180px;
+  max-width: 200px;
+  margin-right: 6px;
+}
+
+.deploy-panel {
+  margin: auto;
+  margin-top: 40px;
+  width: 70%;
+  text-align: center;
+  animation: deploy-in;
+  animation-duration: 0.4s;
+}
+
+@keyframes deploy-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.start-button {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.pre:hover {
+  --background: var(--ion-color-primary);
+  color: white;
+}
+
+.deploy-form {
+  text-align: left;
+  width: 80%;
+  margin: auto;
+}
+
+.deploy-form-item {
+  margin-top: 16px;
+}

@@ -1,0 +1,83 @@
+<ion-card id="container" mode="ios">
+  <ion-card-header mode="ios">
+    <ion-card-title mode="ios">Project</ion-card-title>
+    <ion-card-subtitle mode="ios">Informations about the project</ion-card-subtitle>
+  </ion-card-header>
+  <ion-card-content style="padding-top: 0px">
+
+    <ion-card style="margin-top: 0px" mode="ios">
+      <ion-card-header mode="ios">
+        <ion-card-title mode="ios">Basic informations</ion-card-title>
+        <ion-card-subtitle mode="ios">About the project</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <h2 class="basic-info-text">Health<br><span><img
+                    src="../../../../assets/jenkins_icons/{{ project.healthIcon || 'health-80plus.png' }}"></span></h2>
+            </ion-col>
+            <ion-col>
+              <h2 class="basic-info-text">Last deploy<br><span><span class="dot"
+                    [ngStyle]="{ 'background-color': project.color || 'var(--ion-color-success)' }"></span>{{ project.status }}</span>
+              </h2>
+            </ion-col>
+            <ion-col>
+              <h2 class="basic-info-text">Deploy time<br><span>{{ deployments[deployments.length - 1].timeProfiler.total }}</span></h2>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <h2 class="basic-info-text">Pre Staging Version<br><span>{{ project.versions.pre.substring(0,11) }}</span>
+              </h2>
+            </ion-col>
+            <ion-col>
+              <h2 class="basic-info-text">Staging
+                Version<br><span>{{ project.versions.staging || 'Not deployed' }}</span></h2>
+            </ion-col>
+            <ion-col>
+              <h2 class="basic-info-text">Production
+                Version<br><span>{{ project.versions.production || 'Not deployed' }}</span></h2>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col style="margin-top: 10px">
+              <ion-button (click)="openRepo()" class="basic-info-button" size="small" fill="outline">REPOSITORY</ion-button>
+              <ion-button (click)="openSite(project.sites.pre)" class="basic-info-button" size="small">PRE STAGING</ion-button>
+              <ion-button (click)="openSite(project.sites.staging)" class="basic-info-button" size="small" color="secondary">STAGING</ion-button>
+              <ion-button (click)="openSite(project.sites.production)" class="basic-info-button" size="small" color="success">PRODUCTION</ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card mode="ios">
+      <ion-card-header mode="ios">
+        <ion-card-title mode="ios">Pull Requests</ion-card-title>
+        <ion-card-subtitle mode="ios">Opened pull requests</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <h3 style="text-align: center; font-size: 16px;" *ngIf="pullRequests.length < 1">Couldn't find any opened pull requests!</h3>
+        <ion-list>
+          <ion-item *ngFor="let req of pullRequests">
+            <ion-label>{{ req.source }}</ion-label>
+            <ion-label style="color: gray">{{ req.autor }}</ion-label>
+            <ion-button (click)="openPullRequestSite(req.source)" color="secondary"><ion-icon slot="start" name="eye"></ion-icon>show site</ion-button>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card mode="ios">
+      <ion-card-header mode="ios">
+        <ion-card-title mode="ios">Deployment status</ion-card-title>
+        <ion-card-subtitle mode="ios">Pre staging deployments of {{ monthNames[currentDate.getMonth()] }}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <canvas height="50" id="deployChart"></canvas>
+      </ion-card-content>
+    </ion-card>
+
+  </ion-card-content>
+</ion-card>

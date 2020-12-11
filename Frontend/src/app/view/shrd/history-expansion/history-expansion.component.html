@@ -1,0 +1,33 @@
+<ion-card class="unselectable" mode="ios">
+  <ion-card-header style="cursor: pointer;" (click)="expand()" mode="ios">
+    <ion-card-subtitle mode="ios">{{ deployment.commitMessage }}</ion-card-subtitle>
+    <ion-icon *ngIf="!expanded" name="arrow-forward"></ion-icon>
+    <ion-icon *ngIf="expanded" name="arrow-down"></ion-icon>
+  </ion-card-header>
+
+  <ion-card-content class="content-hist" *ngIf="expanded">
+    <h1 style="color: black; font-weight: bold;">{{ deployment.date.split('_')[1] }}</h1>
+    <ion-grid>
+      <ion-row>
+        <ion-col><h2 class="basic-info-text">Commit id<br><span>{{ deployment.commit.substring(0,11) }}</span></h2></ion-col>
+        <ion-col><h2 class="basic-info-text">Branch<br><span>{{ deployment.branch }}</span></h2></ion-col>
+        <ion-col><h2 class="basic-info-text">Author<br><span>{{ deployment.author }}</span></h2></ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col><h2 class="basic-info-text">Deployment mode<br><span>{{ deployment.mode }}</span></h2></ion-col>
+        <ion-col><h2 class="basic-info-text">Deployment status<br><span>{{ deployment.deploy == true ? 'Successful' : 'Failed' }}</span></h2></ion-col>
+        <ion-col><h2 class="basic-info-text">Build status<br><span>{{ deployment.build == true ? 'Successful' : 'Failed' }}</span></h2></ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col><h2 class="basic-info-text">Npm error<br><span>{{ deployment.npmError == true ? 'Yes' : 'No'}}</span></h2></ion-col>
+        <ion-col><h2 class="basic-info-text">Camunda error<br><span>{{ deployment.camundaError == true ? 'Yes' : 'No' }}</span></h2></ion-col>
+        <ion-col><h2 class="basic-info-text">Cloud Function error<br><span>{{ deployment.functionsError == true ? 'Yes' : 'No' }}</span></h2></ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col><h2 class="basic-info-text">Unit test<br><span>{{ deployment.unit.success }} Success, {{ deployment.unit.failed }} Failed</span></h2></ion-col>
+        <ion-col><h2 class="basic-info-text">E2e test<br><span>{{ deployment.e2e.success }} Success, {{ deployment.e2e.failed }} Failed</span></h2></ion-col>
+        <ion-col><h2 class="basic-info-text">Deploy time<br><span>{{ deployment.timeProfiler.total }}</span></h2></ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>

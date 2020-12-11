@@ -1,0 +1,55 @@
+<ion-segment value="{{type}}" (ionChange)="segmentChanged($event)">
+  <ion-segment-button value="staging">
+    <ion-label>Staging</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="production">
+    <ion-label>Production</ion-label>
+  </ion-segment-button>
+</ion-segment>
+
+<ion-card class="panel" *ngIf="type == 'staging'" mode="ios">
+  <ion-card-header mode="ios">
+    <ion-card-title mode="ios">STAGING</ion-card-title>
+    <ion-card-subtitle mode="ios">Rollback staging</ion-card-subtitle>
+  </ion-card-header>
+  <ion-card-content>
+    <p>Rollback to a pervious version on the staging firebase site.</p>
+
+    <form class="rollback-form">
+      <ion-item class="rollback-form-item">
+        <ion-label>Version to checkout</ion-label>
+        <ion-select (ionChange)="getStagingCheckout($event)" mode="ios" cancelText="Cancel" okText="Select">
+          <ion-select-option *ngFor="let tag of stagingTags" mode="ios" value="{{tag.displayId}}">
+            {{ tag.displayId }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </form>
+
+    <ion-button class="rollback-button" size="small" (click)="startStaging()" color="secondary">Start rollback
+    </ion-button>
+
+  </ion-card-content>
+</ion-card>
+
+<ion-card class="panel" *ngIf="type == 'production'" mode="ios">
+  <ion-card-header mode="ios">
+    <ion-card-title mode="ios">PRODUCTION</ion-card-title>
+    <ion-card-subtitle mode="ios">Rollback production</ion-card-subtitle>
+  </ion-card-header>
+  <ion-card-content style="padding-top: 0px">
+    <p>Rollback to a pervious version on the production.</p>
+
+    <form class="rollback-form">
+      <ion-item class="rollback-form-item">
+        <ion-label>Version to checkout</ion-label>
+        <ion-select (ionChange)="getProductionCheckout($event)" mode="ios" cancelText="Cancel" okText="Select">
+          <ion-select-option *ngFor="let tag of productionTags" mode="ios" value="{{tag.displayId}}">
+            {{ tag.displayId }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </form>
+
+    <ion-button class="rollback-button" size="small" (click)="startProduction()" color="success">Start production</ion-button>
+
+  </ion-card-content>
+</ion-card>

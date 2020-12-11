@@ -1,0 +1,82 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <app-user-button slot="end"></app-user-button>
+    <ion-title>Testing</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card id="container" mode="ios">
+    <ion-card-header mode="ios">
+      <ion-card-title mode="ios">Testing</ion-card-title>
+      <ion-card-subtitle mode="ios">Project testing results</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+
+      <ion-segment mode="ios" value="lint" (ionChange)="segmentChanged($event)">
+        <ion-segment-button value="lint">
+          <ion-label>Linting</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="e2e">
+          <ion-label>E2e tests</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="unit">
+          <ion-label>Unit tests</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+
+      <circle-loader style="margin-top: 20px"></circle-loader>
+
+    </ion-card-content>
+  </ion-card>
+
+  <!-- <div id="container">
+    <title-divider [title]="'Testing'" [subtitle]="'Project testing results'" [icon]="'testing'"></title-divider>
+
+    <line-loader *ngIf="!loaded"></line-loader>
+
+    <div *ngIf="loaded" id="controls">
+      <mat-form-field id="project-select">
+        <mat-label>Select the project</mat-label>
+        <mat-select (selectionChange)="loadProject($event)">
+          <mat-option *ngFor="let project of projects" [value]="project">
+            {{ project.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <line-loader *ngIf="loaded && !dataLoaded"></line-loader>
+
+    <ion-card *ngIf="loaded && dataLoaded && e2e" id="content">
+      <ion-card-header>
+        <h3>{{ selectedProject.name }}<br><span>Testing results</span></h3>
+      </ion-card-header>
+      <ion-card-content>
+        <mat-tab-group>
+          <mat-tab label="E2e testing">
+            <e2e [data]="e2e" [project]="selectedProject"></e2e>
+          </mat-tab>
+          <mat-tab label="Unit testing">
+            <p style="text-align: center; margin-top: 30px">Under development</p>
+          </mat-tab>
+          <mat-tab label="Summary">
+            <div class="details">
+              <h5>Results<br><span>Details of the testing</span></h5>
+            </div>
+            <div class="panel">
+              <canvas #resultChart></canvas>
+            </div>
+          </mat-tab>
+        </mat-tab-group>
+      </ion-card-content>
+    </ion-card>
+
+  </div>-->
+
+
+</ion-content>

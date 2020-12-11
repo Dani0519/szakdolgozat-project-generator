@@ -1,0 +1,16 @@
+{
+  "name": "name",
+  "description": "Test project.",
+  "repository": "https://stash.sed.hu/scm/dep/teszt-repository.git",
+  "branch": "master",
+  "type": "web",
+  "folder": "web",
+  "aliases": [
+    "default"
+  ],
+  "sites": {
+    "pre": "website"
+  },
+  "jiraKey": "DEP",
+  "pre-id": "test-id"
+}

@@ -1,0 +1,113 @@
+.suite {
+    margin: auto;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    width: 60%;
+    min-width: 600px;
+    display: block;
+}
+
+h4 {
+    color: black;
+    font-size: 22px;
+    font-weight: 500;
+    margin-top: 10px;
+    line-height: 18px;
+    text-align: center;
+}
+
+h4 > span {
+    font-size: 14px;
+    font-weight: normal;
+    color: var(--ion-color-medium);
+}
+
+mat-expansion-panel {
+    margin: auto;
+    margin-top: 14px;
+    display: block;
+    width: 100%;
+    min-width: 500px;
+}
+
+.specs {
+    padding: 5px;
+}
+
+h5 {
+    font-size: 20px;
+    color: black;
+    font-weight: 450;
+    line-height: 16px;
+    margin-bottom: 20px;
+}
+
+h5 > span {
+    font-size: 14px;
+    color: var(--ion-color-medium);
+    font-weight: normal;
+}
+
+#controlers {
+    width: 60%;
+    display: block;
+    margin: auto;
+}
+
+#suite-select {
+    display: block;
+    margin: auto;
+    width: 100%;
+}
+
+mat-radio-group {
+    display: block;
+    margin: auto;
+}
+
+.radio-button {
+    margin-right: 10px;
+}
+
+h3 {
+    color: black;
+    font-size: 26px;
+    text-align: center;
+    font-weight: 500;
+    line-height: 18px;
+    margin-bottom: 20px;
+    margin-top: 40px;
+}
+
+h3 > span {
+    color: var(--ion-color-medium);
+    font-size: 16px;
+    font-weight: normal;
+}
+
+.spec-content > h5 {
+    font-size: 20px;
+    font-weight: 450;
+    line-height: 18px;
+}
+
+.spec-content > h5 > span {
+    color: var(--ion-color-medium);
+    font-size: 14px;
+    font-weight: normal;
+}
+
+.spec-content > h6 {
+    display: inline-block;
+    margin-right: 34px;
+    margin-top: 10px;
+    font-weight: 450;
+    font-size: 16px;
+    line-height: 16px;
+}
+
+.spec-content > h6 > span {
+    font-weight: normal;
+    font-size: 14px;
+    color: var(--ion-color-medium);
+}

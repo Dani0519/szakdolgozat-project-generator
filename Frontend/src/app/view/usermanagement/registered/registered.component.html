@@ -1,0 +1,52 @@
+<ion-card id="container" mode="ios">
+  <ion-card-header mode="ios">
+    <ion-card-title mode="ios">User Management</ion-card-title>
+    <ion-card-subtitle mode="ios">Registered users</ion-card-subtitle>
+  </ion-card-header>
+</ion-card>
+
+<circle-loader *ngIf="!loaded"></circle-loader>
+
+<ion-card id="content" *ngIf="loaded" mode="ios">
+  <ion-card-content style="padding-top: 0px">
+    <div *ngIf="loaded" class="managementbuttons">
+      <ion-button size="small" color="secondary" (click)="register()" i>Register new user</ion-button>
+      <ion-button size="small" (click)="refresh()">Refresh data</ion-button>
+    </div>
+    <table *ngIf="loaded" mat-table [dataSource]="users" class="mat-elevation-z8">
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let element"> {{ element.displayName || 'Admin' }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef>Email</th>
+        <td mat-cell *matCellDef="let element"> {{ element.email }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>Status</th>
+        <td mat-cell *matCellDef="let element"> {{ element.disabled ? 'Disabled' : 'Enabled' }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="lastsign">
+        <th mat-header-cell *matHeaderCellDef>Last sign in</th>
+        <td mat-cell *matCellDef="let element"> {{ element.metadata.lastSignInTime }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td style="text-align: right;" mat-cell *matCellDef="let element">
+          <ion-button (click)="delete(element)" size="small" color="danger" id="delete">
+            <ion-icon size="small" slot="start" name="trash"></ion-icon>
+            Delete user
+          </ion-button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </ion-card-content>
+</ion-card>

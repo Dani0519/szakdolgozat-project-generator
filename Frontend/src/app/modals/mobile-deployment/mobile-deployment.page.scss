@@ -1,0 +1,15 @@
+.page {
+  box-shadow: none;
+  margin-top: 0px;
+  animation: page-in;
+  animation-duration: 0.4s;
+}
+
+@keyframes page-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

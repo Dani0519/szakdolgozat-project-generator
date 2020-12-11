@@ -1,0 +1,24 @@
+.menu-icon {
+  width: 25px;
+}
+
+.menu-label {
+  font-size: 14px;
+  margin-left: 12px;
+}
+
+ion-menu {
+  ion-toolbar {
+    --background: white;
+    --ion-text-color: black;
+  }
+}
+
+#logout {
+  display: block;
+  margin: auto;
+  margin-top: 20px;
+  width: 90%;
+  cursor: pointer;
+  font-size: 14px;
+}

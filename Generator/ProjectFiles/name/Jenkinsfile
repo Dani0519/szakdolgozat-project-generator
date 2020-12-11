@@ -1,0 +1,51 @@
+@Library('Deployment-tools')_
+
+def changed = false;
+def gitAuthor = params.who
+
+node {
+
+  stage('Check the repositories') {
+    try {
+      sh script: 'git clone https://stash.sed.hu/scm/dep/jenkins-project-generator.git .' 
+    } catch (err) {
+      dir('jenkins-project-generator') {
+        sh script: 'git pull'
+      }
+    }
+    dir('teszt-repository') {
+      git branch: 'master', credentialsId: 'devops', url: 'https://stash.sed.hu/scm/dep/teszt-repository.git'
+      if(params.who == 'git'){
+        gitAuthor = sh( script: "git log --pretty='%H %an' | head -1 | cut -c 42-" , returnStdout: true).trim()
+      }
+    }
+    def changedFiles = []
+    for (changeLogSet in currentBuild.changeSets) { 
+      for (entry in changeLogSet.getItems()) { // for each commit in the detected changes
+        for (file in entry.getAffectedFiles()) {
+          changedFiles.add(file.getPath()) // add changed file to list
+        }
+      }
+    }
+    def value = changedFiles.toString()
+    if(value.contains('web/')){
+      changed = true;
+    }
+  }
+
+  stage('Pre deployment') {
+    if(params.manualBuild == true || changed == true) {
+
+      try {
+        sh "ansible-playbook -i /DevOps/inventory ProjectFiles/name/pre.yaml --vault-password-file /DevOps/m2m-vault --extra-vars 'version=\"${params.version}\" branch=\"${params.checkout}\" message=\"${params.message}\" author=\"${gitAuthor}\" lint=\"${lint}\" unit=\"${unit}\" e2e=\"${e2e}\" '"
+      } catch (error) {
+        echo 'Something went wrong in the playbook or the container! DevOps error!'
+      }
+
+      def log_url = getLogUrl("name", "pre")
+      notifyBuild("Pre", "https://website.web.app", "", log_url, '#name-deploys'.toLowerCase())
+      checkDeploymentResult('pre')
+    }
+  }
+
+}

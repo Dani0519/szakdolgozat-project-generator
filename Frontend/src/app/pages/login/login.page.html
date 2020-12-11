@@ -1,0 +1,6 @@
+<ion-content>
+  <login-header></login-header>
+  <sync (readyEmitter)="setReady($event)" *ngIf="!ready"></sync>
+  <login-panel *ngIf="ready"></login-panel>
+  <p *ngIf="!ready">Version 2.5</p>
+</ion-content>

@@ -1,0 +1,20 @@
+<ion-app>
+  <ion-menu type="reveal" side="start">
+    <ion-header>
+      <ion-toolbar translucent>
+        <ion-title>Menu</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-menu-toggle auto-hide="false">
+          <ion-item *ngFor="let item of pages" [routerDirection]="'root'" [routerLink]="[item.path]">
+            <img class="menu-icon" src="{{item.icon}}">
+            <p class="menu-label">{{item.name}}</p>
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet main></ion-router-outlet>
+</ion-app>

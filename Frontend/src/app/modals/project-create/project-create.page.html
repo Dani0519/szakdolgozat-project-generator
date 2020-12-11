@@ -1,0 +1,161 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-grid>
+      <ion-row>
+        <ion-col size = "11">
+          <ion-title>Creating new project</ion-title>
+        </ion-col>
+        <ion-col [hidden]="spinner">
+          <ion-icon class = "close-button" name="ios-close" (click)="close()"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content hidden [hidden]="spinner">
+  <mat-horizontal-stepper [linear]="isLinear" #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup" (ngSubmit)="firstSubmit(firstFormGroup.value, stepper)">
+        <ng-template matStepLabel>Basic information</ng-template>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <mat-form-field class="editProjectInfo">
+                <input matInput type="text" placeholder="Project name" matInput placeholder="Project name"
+                  formControlName="projectName">
+              </mat-form-field>
+            </ion-col>
+            <ion-col>
+              <mat-form-field class="editProjectInfo">
+                <mat-select placeholder="Jira key" [(value)]="selectJiraKey" disableOptionCentering
+                  formControlName="jiraKey">
+                  <mat-option *ngFor="let jiraKeys of listJiraKey" value="{{jiraKeys}}">
+                    {{jiraKeys}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <mat-form-field style="width: 90%;" class="editProjectInfo">
+                <input #repository matInput type="text" matInput placeholder="Repository" placeholder="Repository"
+                  formControlName="projectRepository">
+              </mat-form-field>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <mat-form-field style="width: 90%;" class="editProjectInfo">
+                <textarea matInput type="text" placeholder="Description" matInput placeholder="Description"
+                  formControlName="projectDescription">
+                </textarea>
+              </mat-form-field>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <div>
+          <button class = "button" mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="stashFormGroup">
+      <form [formGroup]="stashFormGroup" (ngSubmit)="stashSubmit(stashFormGroup.value)">
+        <ng-template matStepLabel>Stash info</ng-template>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <mat-form-field>
+                <mat-select #branches placeholder="Branch" [(value)]="selectBranch" disableOptionCentering
+                  formControlName="projectBranch">
+                  <mat-option *ngFor="let branches of listBranches" value="{{branches}}">
+                    {{branches}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </ion-col>
+            <ion-col>
+              <mat-form-field>
+                <input #folder class="projectNameInput" matInput type="text" placeholder="Folder" matInput
+                  placeholder="Folder name" formControlName="projectFolder">
+              </mat-form-field>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <mat-form-field>
+                <mat-select #type placeholder="Type" [(value)]="selectType" disableOptionCentering
+                  formControlName="projectType">
+                  <mat-option *ngFor="let type of types" value="{{type}}">
+                    {{type}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </ion-col>
+            <ion-col>
+              <mat-form-field>
+                <input #preId class="projectNameInput" matInput type="text" matInput
+                  placeholder="Pre ID" formControlName="projectPreId">
+              </mat-form-field>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="2">
+              <button class = "button" mat-button  matStepperPrevious>Back</button>
+            </ion-col>
+            <ion-col size="2" offset="8">
+              <button class = "button" mat-button matStepperNext>Next</button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </form>
+    </mat-step>
+    <mat-step>
+      <form [formGroup]="invoiceForm" (ngSubmit)="sitesSubmit()">
+        <ng-template matStepLabel>Sites and Aliases</ng-template>
+        <ion-grid *ngFor="let itemrow of invoiceForm.controls.itemRows.controls; let i=index">
+          <ion-row>
+            <ion-col>
+              <mat-form-field class="editProjectInfo">
+                <input #site matInput type="text" placeholder="Project site" matInput placeholder="Project site">
+              </mat-form-field>
+            </ion-col>
+            <ion-col>
+              <mat-form-field class="editProjectInfo">
+                <input #aliases class="projectNameInput" matInput type="text" placeholder="Alias" matInput
+                  placeholder="Alias">
+              </mat-form-field>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-button *ngIf="i>0" (click)="deleteRow(i)" class="remove-button">
+                <mat-icon class="remove-icon">do_not_disturb_on</mat-icon>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <ion-button (click)="addNewRow()" class="add-form-button">
+          <mat-icon style="color: #000;">add</mat-icon>
+        </ion-button>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="2">
+              <button  class = "button" mat-button matStepperPrevious>Back</button>
+            </ion-col>
+            <ion-col size="2" offset="8">
+              <button class = "button" mat-button matStepperNext>Generate</button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </form>
+    </mat-step>
+  </mat-horizontal-stepper>
+</ion-content>
+
+<div class="spinner" [hidden]="!spinner">
+  <mat-spinner class="mat-spinner-color"></mat-spinner>
+</div>

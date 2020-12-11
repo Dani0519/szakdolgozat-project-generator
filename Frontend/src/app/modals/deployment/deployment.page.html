@@ -1,0 +1,43 @@
+<ion-content>
+
+  <ion-fab vertical="top" horizontal="end">
+    <ion-fab-button color="secondary" (click)="close()" size="small">
+      <ion-icon name="close"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-card style="box-shadow: none;" mode="ios">
+    <ion-card-header mode="ios">
+      <ion-card-title mode="ios">{{ project.name }}</ion-card-title>
+      <ion-card-subtitle mode="ios">{{ project.description }}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+
+      <ion-segment mode="ios" value="{{ menuOption }}" (ionChange)="segmentChanged($event)">
+        <ion-segment-button value="project">
+          <ion-label>Project</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="history">
+          <ion-label>History</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="deploy">
+          <ion-label>Start Deployment</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="rollback">
+          <ion-label>Rollback</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+      <ion-progress-bar *ngIf="!loaded" type="indeterminate"></ion-progress-bar>
+      
+      <project [project]="project" [deployments]="deployments" [pullRequests]="pullRequests" [chart]="chart" *ngIf="menuOption === 'project' && loaded"></project>
+
+      <history [project]="project" [deployments]="deployments" *ngIf="menuOption === 'history' && loaded"></history>
+
+      <deploy [project]="project" [commits]="commits" *ngIf="menuOption === 'deploy' && loaded"></deploy>
+
+      <rollback [project]="project" [stagingTags]="stagingTags" [productionTags]="productionTags" *ngIf="menuOption === 'rollback' && loaded"></rollback>
+
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

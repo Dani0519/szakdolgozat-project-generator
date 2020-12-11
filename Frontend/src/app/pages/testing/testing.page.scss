@@ -1,0 +1,70 @@
+#container {
+  box-shadow: none;
+}
+
+#project-select {
+  display: block;
+  margin: auto;
+  margin-top: 20px;
+  width: 90%;
+  max-width: 900px;
+}
+
+#content {
+  margin-top: 20px;
+}
+
+.details {
+  display: block;
+  margin-top: 20px;
+  padding: 10px;
+  color: black;
+}
+
+.details > h5 {
+  color: black;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 18px;
+  margin-bottom: 24px;
+}
+
+.details > h5 > span {
+  font-size: 14px;
+  font-weight: normal;
+  color: var(--ion-color-medium);
+}
+
+h3 {
+  color: black;
+  line-height: 16px;
+}
+
+h3 > span {
+  color: var(--ion-color-medium);
+  font-size: 14px;
+}
+
+.panel {
+  display: inline-block;
+  width: 400px;
+}
+
+.panel > h6 {
+  font-size: 20px;
+  font-weight: 450;
+  line-height: 18px;
+}
+
+.panel > h6 > span {
+  font-size: 16px;
+  font-weight: normal;
+  color: var(--ion-color-medium);
+}
+
+ion-segment {
+  margin: auto;
+  margin-top: 10px;
+  padding-top: 2px;
+  width: 90%;
+}

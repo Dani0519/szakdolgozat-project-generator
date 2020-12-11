@@ -1,0 +1,42 @@
+#container {
+  box-shadow: none;
+  margin-top: 10px;
+  animation: in;
+  animation-duration: 0.4s;
+}
+
+@keyframes in {
+  from {
+    opacity: 0;
+    margin-top: 20px;
+  }
+  to {
+    opacity: 1;
+    margin-top: 10px;
+  }
+}
+
+.basic-info-text {
+  font-weight: 500;
+}
+
+.basic-info-text > span {
+  font-weight: normal;
+}
+
+.basic-info-text > span > img {
+  width: 28px;
+}
+
+.basic-info-button {
+  min-width: 160px;
+  margin-right: 10px;
+}
+
+.dot {
+  height: 10px;
+  width: 10px;
+  margin-right: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}

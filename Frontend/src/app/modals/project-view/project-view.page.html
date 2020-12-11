@@ -1,0 +1,275 @@
+<ion-content>
+  <mat-tab-group [selectedIndex]="selectedIndex">
+    <mat-tab label="View">
+      <ion-card class="card" [hidden]="spinner" mode="ios">
+        <ion-card-header>
+          <ion-card-title>{{ projects.name }}</ion-card-title>
+          <ion-card-subtitle class="jiraKey">{{ projects.jiraKey }}</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          {{ projects.description }}
+        </ion-card-content>
+      </ion-card>
+      <ion-card [hidden]="spinner" mode="ios">
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-card-title>Stash Info</ion-card-title>
+              <mat-list class="repositoryList">
+                <mat-list-item>
+                  <img class="stashLogo" src="{{ icon }}">
+                  <p>
+                    <span class="title">
+                      Repository:
+                    </span>
+                    <span class="spanStyle">
+                      {{ projects.repository }}
+                    </span>
+                  </p>
+                </mat-list-item>
+                <mat-list-item>
+                    <ion-icon class="branchLogo" name="git-branch"></ion-icon>
+                    <p class="title">Branch:</p>{{ projects.branch }}
+                </mat-list-item>
+                <mat-list-item>
+                  <mat-icon class="folderLogo" *ngIf="projects.type == 'mobil'"> mobile_screen_share</mat-icon>
+                  <mat-icon class="folderLogo" *ngIf="projects.type == 'web'">web</mat-icon>
+                  <p class="title">Type:</p>{{ projects.type | titlecase }}
+                </mat-list-item>
+                <mat-list-item>
+                  <mat-icon class="folderLogo">folder_open</mat-icon>
+                  <p class="title">Folder:</p>{{ projects.folder | titlecase }}
+                </mat-list-item>
+                <mat-list-item>
+                  <mat-icon class="folderLogo">vpn_key</mat-icon>
+                  <p class="title">Pre-id:</p>{{ projects['pre-id'] }}
+                </mat-list-item>
+              </mat-list>
+            </ion-col>
+            <ion-col>
+              <ion-card-title>Versions</ion-card-title>
+              <mat-list *ngFor="let versions of projects.versions | keyvalue">
+                <mat-list-item style="white-space: pre-wrap !important;"
+                  *ngIf="versions.key != 'pre' && versions.value != ''">
+                  <p>
+                    <span>{{ versions.key | titlecase }}:</span>
+                    <span class="spanStyle">{{ versions.value }}</span>
+                  </p>
+                </mat-list-item>
+              </mat-list>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card>
+      <ion-grid>
+        <ion-row>
+          <ion-col size = "9">
+            <ion-card [hidden]="spinner" mode="ios" style="padding-bottom: 0.5rem;">
+              <ion-card-header>
+                <ion-card-title>Sites</ion-card-title>
+              </ion-card-header>
+              <mat-list class="matListItem" *ngFor="let sites of projects.sites | keyvalue">
+                <mat-list-item>
+                  <img class="firebaseLogo" src="../../../assets/firebase.png">
+                  <p class="siteKeys">
+                    <span>
+                      {{ sites.key | titlecase }}:
+                    </span>
+                    <span class="spanStyle">
+                      <a href="https://{{ sites.value }}.web.app">https://{{ sites.value }}.web.app</a>
+                    </span>
+                  </p>
+                </mat-list-item>
+              </mat-list>
+            </ion-card>
+          </ion-col>
+          <ion-col>
+            <ion-card [hidden]="spinner" mode="ios">
+              <ion-card-header>
+                <ion-card-title>
+                  Aliases
+                </ion-card-title>
+              </ion-card-header>
+              <mat-list *ngFor="let sites of projects.sites | keyvalue">
+                <mat-list-item class="matList">
+                  <mat-icon class="dot-icon">lens</mat-icon>
+                  {{ sites.key }}
+                </mat-list-item>
+              </mat-list>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-button class="view-button" (click)="close()" [hidden]="spinner">
+        <mat-icon>cancel</mat-icon>
+      </ion-button>
+    </mat-tab>
+
+
+
+    <mat-tab label="Edit">
+      <ion-card class="editProjectInfo" [hidden]="spinner">
+        <ion-grid>
+          <h5 style="color: black;">Project name</h5>
+          <ion-row>
+            <ion-col>
+              <mat-form-field class="editProjectInfo">
+                <input #projectName matInput type="text" placeholder="Project name" matInput placeholder="Project name"
+                  value="{{projects.name}}">
+              </mat-form-field>
+            </ion-col>
+            <ion-col>
+              <mat-form-field class="editProjectInfo">
+                <mat-select placeholder="{{ projects.jiraKey }}" [(value)]="selectJiraKey" disableOptionCentering>
+                  <mat-option *ngFor="let jiraKeys of listJiraKey" value="{{jiraKeys}}">
+                    {{jiraKeys}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card>
+      <ion-card class="editProjectInfo" [hidden]="spinner">
+        <ion-grid>
+          <h5 style="color: black;">Stash</h5>
+          <ion-row>
+            <ion-col>
+              <mat-form-field style="width: 80%;" class="editProjectInfo">
+                <input #repository matInput type="text" matInput placeholder="Repository" placeholder="Repository"
+                  value="{{projects.repository}}">
+              </mat-form-field>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <mat-form-field class="editProjectInfo">
+                <mat-select #branches placeholder="Branch" [(value)]="selectBranch" disableOptionCentering>
+                  <mat-option *ngFor="let branches of listBranches" value="{{branches}}">
+                    {{branches}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </ion-col>
+            <ion-col>
+              <mat-form-field class="editProjectInfo">
+                <mat-select #type placeholder="Type" [(value)]="selectType" disableOptionCentering>
+                  <mat-option *ngFor="let type of types" value="{{type}}">
+                    {{type}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <mat-form-field class="editProjectInfo">
+                <input #folder class="projectNameInput" matInput type="text" placeholder="Folder" matInput
+                  placeholder="Folder name" value="{{projects.folder}}">
+              </mat-form-field>
+            </ion-col>
+            <ion-col>
+              <mat-form-field class="editProjectInfo">
+                <input #preID class="projectNameInput" matInput type="text" matInput
+                  placeholder="Pre ID" value="{{projects['pre-id']}}">
+              </mat-form-field>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card>
+      <ion-card [hidden]="spinner">
+        <mat-expansion-panel hideToggle>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Sites
+            </mat-panel-title>
+            <mat-panel-description>
+              Firebase sites with alias
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <h5 style="color: black;">Hosting sites and Aliases</h5>
+          <ion-grid *ngFor="let sites of projects.sites | keyvalue">
+            <ion-row>
+              <ion-col>
+                <ion-item lines="none">
+                  <mat-form-field class="editProjectInfo">
+                    <input #site matInput type="text" placeholder="Project site" matInput placeholder="Project site"
+                      value="{{sites.value}}">
+                  </mat-form-field>
+                </ion-item>
+              </ion-col>
+              <ion-col>
+                <ion-item lines="none">
+                  <mat-form-field class="editProjectInfo">
+                    <input #aliases class="projectNameInput" matInput type="text" placeholder="Alias" matInput
+                      placeholder="Alias" value="{{sites.key}}">
+                  </mat-form-field>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+          <form [formGroup]="invoiceForm">
+            <ion-grid *ngFor="let itemrow of invoiceForm.controls.itemRows.controls; let i=index">
+              <ion-row>
+                <ion-col>
+                  <ion-item lines="none">
+                    <mat-form-field class="editProjectInfo">
+                      <input #site matInput type="text" placeholder="Project site" matInput placeholder="Project site">
+                    </mat-form-field>
+                  </ion-item>
+                </ion-col>
+                <ion-col>
+                  <ion-item lines="none">
+                    <mat-form-field class="editProjectInfo">
+                      <input #aliases class="projectNameInput" matInput type="text" placeholder="Alias" matInput
+                        placeholder="Alias">
+                    </mat-form-field>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <ion-button *ngIf="i>0" (click)="deleteRow(i)" class="remove-button">
+                    <mat-icon class="remove-icon">do_not_disturb_on</mat-icon>
+                  </ion-button>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+            <ion-button (click)="addNewRow()" class="add-form-button">
+              <mat-icon style="color: #000;">add</mat-icon>
+            </ion-button>
+          </form>
+        </mat-expansion-panel>
+      </ion-card>
+      <ion-card [hidden]="spinner">
+        <div style="padding-left: 1rem;">
+          <h5 style="color: black;">Project description</h5>
+          <br>
+        </div>
+        <div class="basic-info">
+          <mat-form-field style="width: 90%;" class="editProjectInfo">
+            <textarea #projectDescription matInput type="text" placeholder="Description" matInput
+              placeholder="Description" value="{{projects.description}}"></textarea>
+          </mat-form-field>
+        </div>
+      </ion-card>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-button style="left: 1.3rem" class="add-button" (click)="close()" [hidden]="spinner">
+              <mat-icon>cancel</mat-icon>
+            </ion-button>
+          </ion-col>
+          <ion-col size="1.5">
+            <ion-button class="add-button" (click)="log()" [hidden]="spinner">
+              <mat-icon>done</mat-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </mat-tab>
+  </mat-tab-group>
+</ion-content>
+<div class="spinner" [hidden]="!spinner">
+  <mat-spinner class="mat-spinner-color"></mat-spinner>
+</div>

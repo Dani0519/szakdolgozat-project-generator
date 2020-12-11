@@ -1,0 +1,50 @@
+---
+- hosts: docker
+  {% raw %}
+  vars:
+    date: "{{ ansible_date_time.date }}_{{ansible_date_time.hour}}:{{ansible_date_time.minute}}:{{ansible_date_time.second}}"
+  {% endraw %}
+  tasks:
+    - include_vars: /DevOps/devops-pass.yaml
+
+    - name: Stop & Delete the container if it exist
+      shell: docker rm -f {{ container_name }}
+      ignore_errors: yes
+
+    - name: Start the image
+      docker_container:
+        name: {{ container_name }}
+        image: {{ deploy_image }}
+        shm_size: 512m
+        detach: no
+        env:
+          repository: {{ repository }}
+          branch: {% raw %}"{{ branch }}"{% endraw %}
+          message: {% raw %}"{{ message }}"{% endraw %}
+          lint: {% raw %}"{{ lint }}"{% endraw %}
+          unit: {% raw %}"{{ unit }}"{% endraw %}
+          e2e: {% raw %}"{{ e2e }}"{% endraw %}
+          mode: "{{ mode }}"
+          folder: "{{ folder }}"
+          firebaseSite: "{{ site }}"
+          date: {% raw %}"{{ date }}"{% endraw %}
+          postfix: "{{ postfix }}"
+          version: {% raw %}"{{ version }}"{% endraw %}
+          jobname: "{{ container_name }}"
+          author: {% raw %}"{{ author }}"{% endraw %}
+          e2epostfix: ""
+        volumes:
+          - /home/admin/FirebaseDeployments:/opt/shared
+          - /home/admin/CodeCoverages/coverages:/opt/shareCoverage
+        env_file: /home/admin/
+      ignore_errors: yes
+
+    - name: Delete the last container
+      shell: docker rm {{ container_name }}
+      ignore_errors: yes
+
+    - name: Fetching results from the docker server
+      fetch:
+        src: /home/admin/FirebaseDeployments/{{ container_name }}/{{ mode }}/{% raw %}{{date}}{% endraw %}/result.json
+        dest: /home/admin/.jenkins/workspace/{{ jenkins_name }}/result-{{ mode }}.json
+        flat: yes

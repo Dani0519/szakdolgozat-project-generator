@@ -1,0 +1,173 @@
+::ng-deep .mat-tab-label  {
+    width: 50% !important;
+  }
+::ng-deep .mat-ink-bar {
+    background-color:black !important;
+}
+.sc-ion-card-md-h {
+    color: black;
+}
+::ng-deep .mat-form-field.mat-focused .mat-form-field-ripple{
+    background-color: black !important;
+    padding-left: 5rem;
+}
+.card {
+    //background-color: #fafafa;
+    margin-top: 1rem;
+}
+.sitesCard {
+    //background-color: #f5f5f5;
+    margin-top: 1rem;
+    width: 75%;
+}
+.aliasesCard {
+    //background-color: #f5f5f5;
+    margin-top: 1rem;
+    width: 25%;
+}
+.stashInfoCard {
+    //background-color: #f5f5f5;
+    padding-top: 1rem;
+    margin-top: 1rem;
+    padding-left: 1rem;
+}
+.jiraKey {
+    padding-left: 0.5rem;
+}
+.firebaseLogo {
+    max-width: 2rem;
+    max-height: 2rem;
+}
+.stashLogo {
+    height: 25px;
+    width: 25px;
+    border-radius: 5rem;
+}
+.folderLogo {
+    margin-right: 1rem;
+    max-width: 1.5rem;
+    max-height: 1.5rem;
+}
+.branchLogo {
+    margin-right: 1rem;
+    max-width: 2rem;
+    max-height: 2rem;
+    min-width: 1.5rem;
+    min-height: 1.5rem;
+}
+.dot-icon {
+    position: relative;
+    transform: scale(0.35)
+}
+.container {
+    max-height: 100%;
+    max-width: 100%;
+    display: flex;
+}
+.repoInfo {
+    width: 65%;
+    position: relative;
+}
+.versionInfo{
+    position: relative;
+    width: 30%;
+}
+.matList {
+    max-height: 5rem;
+}
+.repositoryList {
+    padding-bottom: 0rem;
+    max-width: 50%;
+}
+.title {
+    margin-right: 0.5rem;
+    text-decoration: underline;
+    font-size: 1rem;
+}
+.titleWrapper{
+    max-width: 100%;
+    display: flex;
+}
+
+p span {
+    display: block;
+  }
+.spanStyle {
+    white-space: normal;
+    padding-left: 1rem;
+}
+.add-button {
+    // --background: none;
+    --border-radius: 50%;
+    height: 4rem;
+    width: 4rem;
+    position: relative;
+    //left: 45%;
+    --background-hover: grey;
+}
+.editInput {
+    max-width: 50%;
+}
+
+.editProjectInfo {
+    padding-left: 1rem;
+}
+
+.project-info-container {
+    display: flex;
+    max-width:100%;
+
+}
+.project-name-div {
+    max-width: 50%;
+    width:100%
+}
+.basic-info {
+    padding-left: 1rem;
+    width: 100%;
+}
+.add-form-button {
+    --background: whitesmoke;
+    --border-radius: 50%;
+    height: 2rem;
+    width: 2rem;
+    padding-left: 2.6rem;
+    //left: 30.5rem;
+    position: relative;
+    --background-hover:  rgb(211, 201, 201);
+}
+.remove-button {
+    --background-color: none;
+    padding-left: 2rem;
+    --background: none;
+    --border-radius: 50%;
+    position: relative;
+    height: 2rem;
+    width: 2rem;
+    --background-hover:  rgb(211, 201, 201);
+}
+.remove-icon {
+    color: rgb(245, 66, 114);
+}
+.spinner {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -50px;
+    margin-left: -50px;
+    width: 100px;
+    height: 100px;
+}
+
+.mat-spinner-color::ng-deep circle{
+    stroke: rgb(0, 0, 0) !important;
+}
+.view-button {
+    // --background: none;
+    --border-radius: 50%;
+    height: 4rem;
+    width: 4rem;
+    position: relative;
+    left: 45%;
+    --background-hover: grey;
+}

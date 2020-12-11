@@ -1,0 +1,30 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+#login-header-container {
+  display: block;
+  width: 90%;
+  margin: auto;
+  margin-top: 10%;
+  padding: 10px;
+  text-align: center;
+}
+
+#login-header-container > h1 {
+  font-size: 120%;
+  text-transform: uppercase;
+}
+
+#login-header-container > p {
+  font-size: 14px;
+}
+
+img {
+  display: block;
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  width: 80px;
+}

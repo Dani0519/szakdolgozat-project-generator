@@ -1,0 +1,16 @@
+{
+    "name": "unit-test",
+    "description": "Teszt",
+    "repository": "https://stash.sed.hu/scm/dep/teszt-repository.git",
+    "branch": "master",
+    "type": "web",
+    "folder": "web",
+    "aliases": [
+      "default"
+    ],
+    "sites": {
+      "pre": "site"
+    },
+    "jiraKey": "UNIT",
+    "pre-id": "teszt"
+  }

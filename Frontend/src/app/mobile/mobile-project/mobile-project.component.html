@@ -1,0 +1,33 @@
+<ion-list style="margin-top: 0px; padding-top: 0px">
+  <ion-list-header>
+    <ion-label>Build status</ion-label>
+  </ion-list-header>
+  <ion-item>
+    <ion-icon name="checkmark"></ion-icon>
+    <ion-label>Success</ion-label>
+    <ion-label style="text-align: right;" slot="end">{{ chartData.success }}</ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-icon name="close"></ion-icon>
+    <ion-label>Failed</ion-label>
+    <ion-label style="text-align: right;" slot="end">{{ chartData.failed }}</ion-label>
+  </ion-item>
+</ion-list>
+
+<ion-list style="margin-top: 20px;">
+  <ion-list-header>
+    <ion-label>Versions</ion-label>
+  </ion-list-header>
+  <ion-item>
+    <ion-label> Pre Staging</ion-label>
+    <ion-label style="text-align: right;" slot="end">{{ project.versions.pre.substring(0,11) || 'Not deployed' }}</ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label> Staging</ion-label>
+    <ion-label style="text-align: right;" slot="end">{{ project.versions.staging || 'Not deployed' }}</ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label> Production</ion-label>
+    <ion-label style="text-align: right;" slot="end">{{ project.versions.production || 'Not deployed' }}</ion-label>
+  </ion-item>
+</ion-list>

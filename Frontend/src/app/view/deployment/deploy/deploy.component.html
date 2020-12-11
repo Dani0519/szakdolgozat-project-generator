@@ -1,0 +1,79 @@
+<ion-card id="container" mode="ios">
+  <ion-card-header mode="ios">
+    <ion-card-title mode="ios">Deploy</ion-card-title>
+    <ion-card-subtitle mode="ios">Start a deployment</ion-card-subtitle>
+  </ion-card-header>
+  <ion-card-content>
+
+    <ion-button (click)="setType('pre')" class="type-button" shape="round" size="small">Pre Staging</ion-button>
+    <ion-button (click)="setType('staging')" class="type-button" shape="round" size="small" color="secondary">Staging</ion-button>
+    <ion-button (click)="setType('production')" class="type-button" shape="round" size="small" color="success">Production</ion-button>
+
+
+    <ion-card class="deploy-panel" *ngIf="type === 'pre'" mode="ios">
+      <ion-card-header mode="ios">
+        <ion-card-title mode="ios">PRE STAGING</ion-card-title>
+        <ion-card-subtitle mode="ios">Deploying to the {{ project.sites.pre }} domain</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <p>Pre staging build triggered when a new commit hit the master branch.<br>This stage deploy the current version of the master to the pre staging domain.</p>
+
+          <ion-button (click)="startPreStaging()" fill="outline" class="start-button pre">Start deployment</ion-button>
+
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="deploy-panel" *ngIf="type === 'staging'" mode="ios">
+      <ion-card-header mode="ios">
+        <ion-card-title mode="ios">STAGING</ion-card-title>
+        <ion-card-subtitle mode="ios">Deploying to the {{ project.sites.staging }} domain</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <p>Staging builds not run automatically.<br>The product manager start the deployment process with this button.<br>This stage deploy to the staging domain of the project.</p>
+
+        <form class="deploy-form">
+          <ion-item class="deploy-form-item">
+            <ion-input (keyup)="getStagingVersion($event)" placeholder="Version"></ion-input>
+          </ion-item>
+          <ion-item class="deploy-form-item">
+            <ion-label>Version to checkout</ion-label>
+            <ion-select (ionChange)="getStagingCheckout($event)" mode="ios" cancelText="Cancel" okText="Select">
+              <ion-select-option mode="ios" value="master">Master</ion-select-option>
+              <ion-select-option *ngFor="let commit of commits" mode="ios" value="{{commit.id.substring(0,11)}}">{{ commit.message }}</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </form>
+
+        <ion-button (click)="startStaging()" color="secondary" fill="outline" class="start-button pre">Start deployment</ion-button>
+
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="deploy-panel" *ngIf="type === 'production'" mode="ios">
+      <ion-card-header mode="ios">
+        <ion-card-title mode="ios">PRODUCTION</ion-card-title>
+        <ion-card-subtitle mode="ios">Deploying to the {{ project.sites.production }} domain</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <p>Production builds also not run automatically.<br>The product manager start the deployment process with this button.<br>This stage deploy to the production domain of the project.</p>
+        
+        <form class="deploy-form">
+          <ion-item class="deploy-form-item">
+            <ion-input (keyup)="getProductionVersion($event)" placeholder="Version"></ion-input>
+          </ion-item>
+          <ion-item class="deploy-form-item">
+            <ion-label>Version to checkout</ion-label>
+            <ion-select (ionChange)="getProductionCheckout($event)" mode="ios" cancelText="Cancel" okText="Select">
+              <ion-select-option mode="ios" value="master">Master</ion-select-option>
+              <ion-select-option *ngFor="let commit of commits" mode="ios" value="{{commit.id.substring(0,11)}}">{{ commit.message }}</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </form>
+
+        <ion-button (click)="startProduction()" color="success" fill="outline" class="start-button pre">Start deployment</ion-button>
+
+      </ion-card-content>
+    </ion-card>
+
+  </ion-card-content>
+</ion-card>

@@ -1,0 +1,33 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+#container {
+   display: block;
+   width: 100%;
+   margin-bottom: 0px;
+}
+
+h3 {
+   padding-left: 40px;
+   font-size: 18px;
+}
+
+p {
+  color: gray;
+  padding-left: 40px;
+  font-size: 14px;
+}
+
+img {
+   width: 30px;
+   float: left;
+}
+
+ion-badge {
+   margin-left: 2px;
+   margin-bottom: 5px;
+   padding: 2px;
+   font-size: 12px;
+}

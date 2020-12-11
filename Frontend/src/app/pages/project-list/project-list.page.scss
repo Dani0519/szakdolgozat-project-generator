@@ -1,0 +1,135 @@
+// .projects-card {
+//     border-radius: 15px 15px 15px 15px;
+//     background-color: #D9D4D2;
+//     position: relative;
+//     padding-top: 100%;
+//     user-select: none;
+//     cursor: pointer;
+// }
+
+.wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(20rem, 2fr));
+    gap: 1rem;
+    padding: 0 1rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    margin-top: 2rem;
+    padding-left: 1rem;
+    max-height: auto;
+    margin-bottom: 7rem;
+    overflow: auto;
+    position: relative;
+}
+.projects-card {
+    border-radius: 15px 15px 15px 15px;
+    background-color: whitesmoke;
+    position: relative;
+    user-select: none;
+    height: 20rem;
+}
+#new-project-card {
+    border-radius: 15px 15px 15px 15px;
+    position: relative;
+    background-color: whitesmoke;
+    user-select: none;
+}
+.add-button {
+    color: white;
+    background-color:rgb(12, 209, 232);
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    left: 50%;
+    top: 45%;
+    transform: translate(-50%, -45%);
+    -ms-transform: translate(-50%, -45%); /* for IE 9 */
+    -webkit-transform: translate(-50%, -45%); /* for Safari */
+}
+.edit-button {
+    height: 2rem;
+    width: 4.5rem;
+    color: black;
+    --background: whitesmoke;
+    position: relative;
+    margin-left : 1rem;
+    --background-hover: grey;
+}
+.view-button{
+    height: 2rem;
+    width: 4.5rem;
+    color: black;
+    --background: whitesmoke;
+    position: relative;
+    --background-hover: grey;
+}
+.row {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    padding-top: 4.5rem;
+    
+   
+}
+.project-name {
+    max-height: 100px;
+    position: relative;
+    color: black;
+    padding: 1.5rem;
+}
+.jira-logo {
+    position: relative;
+    height: 4rem;
+    width: 4rem;
+    padding-top: 0.5rem;
+    padding-left: 1rem;
+}
+.jira-key {
+    font-weight: 400;
+    font-size: 0.5em;
+    padding-left: 1rem;
+    color: grey;
+  }
+
+.spinner {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -50px;
+    margin-left: -50px;
+    width: 100px;
+    height: 100px;
+}
+
+.mat-spinner-color::ng-deep circle{
+    stroke: rgb(0, 0, 0) !important;
+}
+
+.jira-image {
+    height: 25px;
+    width: 25px;
+    border-radius: 5rem;
+
+}
+
+.list-header {
+    color: grey;
+    font-size: 0.9rem;
+}
+
+.list-item {
+    font-size: 0.9rem;
+}
+
+.list-card {
+    margin: 2rem;
+    padding-bottom: 1.5rem;
+}
+
+::ng-deep .mat-tab-label  {
+    width: 50% !important;
+  }
+::ng-deep .mat-ink-bar {
+    background-color:black !important;
+}

@@ -1,0 +1,17 @@
+<ion-card mode="ios" id="container">
+  <ion-card-header mode="ios">
+    <ion-card-title mode="ios">Login</ion-card-title>
+    <ion-card-subtitle mode="ios">Login to your account</ion-card-subtitle>
+  </ion-card-header>
+  <div id="form">
+    <form>
+      <ion-item>
+        <ion-input (keyup)="getEmail($event)" placeholder="Email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input type="password" (keyup)="getPassword($event)" placeholder="Password"></ion-input>  
+      </ion-item>
+    </form>
+    <ion-button style="margin-top: 40px" (click)="login()" expand="full">Login</ion-button>
+  </div>
+</ion-card>
